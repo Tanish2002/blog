@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Starting a Blog</title>
+<link rel='stylesheet' type='text/css' href='../style.css'>
+<meta charset='utf-8'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body class=b>
+<h1><cyan>$</cyan> Starting a Blog<blink>_</blink></h1>
+<hr>
+<p>So I decided to make a blog, why? you may ask well I don't really know myself, I just wanted to have something I can devote some of my free time to<br />
+I also wanted to just get in the habbit of typing regularly.</p>
+<h1>What will be the blog like?</h1>
+<p>Well I have not yet decided a specific type of blog, also it's just a personal blog so I'll honestly just add blogs about what's happening in life, What I am working on or just some random cool stuff I found online<br />
+I am even thinking of writing reviews of anime I watched but I have a another <a href="http://tanish2002.rf.gd/">website</a> which is related to anime so maybe I'll do that there...again not yet decided.</p>
+<h1>How did you make this blog</h1>
+<p>Well I considered a lot of option but from the start I wanted to generate the blog using Static site generators but stuff like hexa,jekyll and hugo are too big and have a lot of dependencies which would've been overkill for this small blog<br />
+So after some research I settled on a shell script site generator which would use markdown/org as templates, then I started working on making a one but as I'm very <em>good</em> with shell scripts it ended pretty badly but after some searching I found the exact same thing I was looking for- <a href="https://github.com/LukeSmithxyz/lb">lb</a><br />
+lb was written in pure bash and was pretty easy to use but as I said earlier I wanteed to use markdown/org for templates, so I had to tinker a bit with the script and the css and then it worked perfectly<br />
+To generate sites all I have to do is <code>./lb m</code> and it asks for the article name and then opens my text editor with the draft file where I can easily write my blog in <strong>Markdown/ORG</strong> after saving the draft I can publish it using <code>./lb p</code> and it auto genrates the article with required css and header tags. For translating markdown/org to html and the other way around I use *<a href="https://pandoc.org/">Pandoc</a>*<br />
+The File structure is pretty easy to understand as well</p>
+<pre><code>blog
+├── rolling.html
+├── blogindex.html
+├── lb
+├── posts
+│   ├── .drafts
+│   │   └── starting-a-blog.md
+│   ├── .htaccess
+│   └── this-is-a-test-blog.html
+├── rss.xml
+└── sup</code></pre>
+<p>Here <code>rolling.html</code> is the blog file where all the blog posts are stored in a rolling release type format, <code>blogindex.html</code> is also a auto generated file where all the blogs are stored in a list type format, in the <code>posts</code> directory <code>.drafts</code> is where all the drafts are stored which are staged to be published and all the other html files are the already published articles, all other things are self explanatory</p>
+<h1>Will this blog be updated often?</h1>
+<p>Short answer- NO, mostly becuase I'm busy with college and other stuff and this blog was mostly made becuase I wanted to make one :P, though I would try my best to update the blog often. Please don't hate me if I don't kthx.<br />
+Anyways I guess I'll end this blog here as this blog was made mostly for testing purpose. Thanks for reading 😊</p>
+<footer><span style="float:left;">by <strong><a href='https://tanish2002.gitlab.io/'>Tanish Khare</a></strong>
+<small>[<a href='../blogindex.html'>index</a>|<a href='../rolling.html#starting-a-blog'>rolling</a>]<br><a href='../rss.xml'>subscribe</a></small></span><span style="float:right;"><small>Feb 22, 2021</small></span></footer>
+</body>
+
+</html>

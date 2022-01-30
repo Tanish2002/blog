@@ -1,0 +1,132 @@
+#!/bin/bash
+name="Tanish Khare"
+webdir="$PWD"
+website="https://tanish2002.gitlab.io/" # Keep a trailing slash.
+css="../style.css"
+blogfile="rolling.html"
+indexfile="index.html"
+rssfile="rss.xml"
+archivefile="$webdir/posts/.htaccess"
+[ -z "$EDITOR" ] && EDITOR="vim"
+
+[ ! -d "$webdir/posts/.drafts" ] &&
+  read -erp "Initialize blog in $webdir?" ask &&
+  if [ "$ask" = "y" ]; then
+    printf "Initializing blog system...\\n"
+    mkdir -pv "$webdir/posts/.drafts" || printf "Error. Do you have write permissions in this directory?\\n"
+    echo "Options +Indexes" >"$archivefile"
+  else
+    exit
+  fi
+
+newpost() {
+  read -erp "Give a title for your post:
+    " title
+  echo "$title" | grep -q "\"" && printf "Double quotation marks (\") are not allowed in entry titles.\\n" && exit
+  url="$(echo "$title" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g")"
+  echo "AddDescription \"$title\" \"$url.html\"" >>"$archivefile" || {
+    echo "Error: Is $archivefile writeable?"
+    exit
+  }
+  ([ -f "$webdir/posts/.drafts/$url.html" ] || [ -f "$webdir/posts/$url.html" ]) && echo "There is already an existing draft or post of that same name/URL." && exit
+  if [[ $1 == m ]]; then
+    $EDITOR "$webdir/posts/.drafts/$url.md"
+  elif [[ $1 == o ]]; then
+    emacs "$webdir/posts/.drafts/$url.org"
+  fi
+}
+
+listandReturn() {
+  printf "Listing contents of %s\\n" "$1"
+  case "$(ls "$1" | wc -l)" in
+  0) echo "There's nothing to $2." && exit 1 ;;
+  1) number=1 && printf "There's only one entry to %s.\\nDefaulting selection to %s\\n" "$2" "$(ls -rc "$1" | awk -F '/' '{print $NF}')" ;;
+  *)
+    ls -rc "$1" | awk -F '/' '{print $NF}' | nl
+    read -erp "Pick an entry by number to $2, or press Ctrl-C to cancel. " number
+    ;;
+  esac
+  chosen="$(ls -rc "$1" | nl | grep -w " $number" | awk '{print $2}')"
+  basefile="$(basename "$chosen")" && base="${basefile%.*}"
+}
+
+getExtension() {
+  : "${1%/}"
+  printf '%s\n' "${_##*.}"
+}
+
+publish() {
+  if [[ $(tail -1 $webdir/posts/.drafts/$chosen) = "EDITED" ]]; then
+    revision="True"
+    sed -i '$d' $webdir/posts/.drafts/$chosen
+  fi
+  if [[ $(getExtension $chosen) == md ]]; then
+    pandoc --from markdown_strict --to html "$webdir/posts/.drafts/$chosen" >"$webdir/posts/.drafts/${chosen/.md/.html}"
+    rm -rf "$webdir/posts/.drafts/$chosen"
+    chosen="${chosen/.md/.html}"
+    basefile="$(basename "$chosen")" && base="${basefile%.*}"
+  elif [[ $(getExtension $chosen) == org ]]; then
+    pandoc --from org --to markdown_strict "$webdir/posts/.drafts/$chosen" | pandoc --from markdown_strict --to html >"$webdir/posts/.drafts/${chosen/.org/.html}"
+    rm -rf "$webdir/posts/.drafts/$chosen"
+    chosen="${chosen/.org/.html}"
+    basefile="$(basename "$chosen")" && base="${basefile%.*}"
+  fi
+  delete draft
+  htaccessentry=$(grep "$basefile" "$archivefile")
+  realname="$(echo "$htaccessentry" | cut -d'"' -f2)"
+  rssdate="$(grep "$basefile" posts/.htaccess | sed "s/.*\.html\"* *#*//g" | tr -d '\n')"
+  [ -z "$rssdate" ] && rssdate="$(LC_TIME=en_US date '+%a, %d %b %Y %H:%M:%S %z')" # RSS date formats must comply with standards to validate.
+  webdate="$(date '+%b %d, %Y')"                                    # But this visible date you can set to any format.
+  tmpdir=$(mktemp -d)
+  printf "<!DOCTYPE html>\\n<html lang=\"en\">\\n<head>\\n<title>%s</title>\\n<link rel='stylesheet' type='text/css' href='%s'>\\n<meta charset='utf-8'/>\\n<meta name='viewport' content='width=device-width, initial-scale=1'>\\n</head>\\n<body class="b">\\n<h1><cyan>$</cyan> %s<blink>_</blink></h1>\\n<hr>\\n%s\\n<footer><span style=\"float:left;\">by <strong><a href='%s'>%s</a></strong>\\n<small>[<a href='%s'>index</a>|<a href='%s#%s'>rolling</a>]<br><a href='%s'>subscribe</a></small></span><span style=\"float:right;\"><small>%s</small></span></footer>\\n</body>\\n\\n</html>" "$realname" "$css" "$realname" "$(cat "$webdir/posts/.drafts/$basefile")" "$website" "$name" "../$indexfile" "../$blogfile" "$base" "../$rssfile" "$webdate" >"$webdir/posts/$basefile"
+  printf "\\n<item>\\n<title>%s</title>\\n<guid>%s%s#%s</guid>\\n<pubDate>%s</pubDate>\\n<description><![CDATA[\\n%s\\n]]></description>\\n</item>" "$realname" "$website" "$blogfile" "$base" "$rssdate" "$(cat "$webdir/posts/.drafts/$basefile")" >"$tmpdir/rss"
+  if [[ $revision = "True" ]]; then
+    printf "<div class='entry'>\\n<h1 id='%s'>%s</h1>\\n<small>[<a href='%s'>post</a>]</small>\\n%s\\n<small class="webdate">%s[edited]</small>\\n</div>\\n" "$base" "$realname" "posts/$basefile" "$(cat "$webdir/posts/.drafts/$basefile")" "$webdate" >"$tmpdir/html"
+  else
+    printf "<div class='entry'>\\n<h1 id='%s'>%s</h1>\\n<small>[<a href='%s'>post</a>]</small>\\n%s\\n<small class="webdate">%s</small>\\n</div>\\n" "$base" "$realname" "posts/$basefile" "$(cat "$webdir/posts/.drafts/$basefile")" "$webdate" >"$tmpdir/html"
+  fi
+  printf "<li><a href=\"posts/%s\">%s</a></li>\\n" "$basefile" "$realname" >"$tmpdir/index"
+  sed -i "/<!-- LB -->/r $tmpdir/html" "$blogfile"
+  sed -i "/<!-- LB -->/r $tmpdir/rss" "$rssfile"
+  sed -i "/<!-- LB -->/r $tmpdir/index" "$indexfile"
+  sed -i "/ \"$base.html\"/d" "$archivefile"
+  echo "AddDescription \"$realname\" \"$basefile\" #$rssdate" >>"$archivefile"
+  rm -f "$webdir/posts/.drafts/$chosen"
+}
+
+confirm() { read -erp "Really $1 \"$base\"? (y/N) " choice && echo "$choice" | grep -qi "^y$" || exit 1; }
+
+delete() {
+  sed -i "/<item/{:a;N;/<\\/item>/!ba};/#$base<\\/guid/d" "$rssfile"
+  sed -i "/<div class='entry'>/{:a;N;/<\\/div>/!ba};/id='$base'/d" "$blogfile"
+  sed -i "/<li>.*<a href=\"posts\\/$base.html\">/d" "$indexfile"
+  rm -f "$webdir/posts/$basefile" && [[ "$1" != "draft" ]] && printf "Old blog entry removed.\\n"
+}
+
+revise() {
+  if [[ $1 == m ]]; then
+    awk '/^<hr>/{flag=1;next}/<footer>/{flag=0}flag' "$webdir/posts/$chosen" | pandoc --from html --to markdown_strict >"$webdir/posts/.drafts/$base.md"
+    "$EDITOR" "$webdir/posts/.drafts/$base.md"
+    printf 'EDITED' >> "$webdir/posts/.drafts/$base.md"
+  elif [[ $1 == o ]]; then
+    awk '/^<hr>/{flag=1;next}/<footer>/{flag=0}flag' "$webdir/posts/$chosen" | pandoc --from html --to markdown_strict | pandoc --from markdown_strict --to org >"$webdir/posts/.drafts/$base.org"
+    emacs "$webdir/posts/.drafts/$base.org"
+    printf 'EDITED' >> "$webdir/posts/.drafts/$base.org"
+  fi
+  printf "Revision stored in posts/.drafts. Publish as normal entry when desired.\\n"
+}
+
+case "$1" in
+o*) newpost o ;;
+m*) newpost m ;;
+e*) listandReturn "$webdir"/posts/.drafts/ edit && "$EDITOR" "$webdir/posts/.drafts/$chosen" ;;
+p*) listandReturn "$webdir"/posts/.drafts/ publish && publish ;;
+t*)
+  listandReturn "$webdir"/posts/.drafts/ trash && confirm trash && rm -f "$webdir/posts/.drafts/$chosen" && sed -i "/ \"$base.html\"/d" "$archivefile"
+  printf "Draft deleted.\\n"
+  ;;
+d*) listandReturn "$webdir"/posts/ delete && confirm delete && delete && sed -i "/ \"$base.html\"/d" "$archivefile" ;;
+rm*) listandReturn "$webdir"/posts/ revise && revise m ;;
+ro*) listandReturn "$webdir"/posts/ revise && revise o ;;
+*) printf "Usage:\\n  lb o:\\t new draft in org\\n  lb m:\t new draft in markdown\n  lb e:\\t edit draft\\n  lb p:\\t publish/finalize draft\\n  lb rm:\\trevise published entry in md\\n  lb ro:\\trevise published entry in org\\n  lb t:\\t discard draft\\n  lb d:\\t delete published entry\\n\\nBe sure to have the following pattern added to your RSS feed, blog file and blog index:\\n\\n<!-- LB -->\\n" ;;
+esac

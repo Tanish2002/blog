@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <title>Blog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+
+  <body class="b">
+    <h1><cyan>$</cyan> blog<blink>_</blink></h1>
+    <hr />
+    <p>The is the rolling release Index.</p>
+    <!-- LB -->
+<div class='entry'>
+<h1 id='why-linux'>Why Linux?</h1>
+<small>[<a href='posts/why-linux.html'>post</a>]</small>
+<p>I've been using Linux for 2 years now. When I started it was difficult to find a truly optimal guide or some reasons as to why should I even bother using Linux when Windows "just works".<br />
+Well through this post I'm going to explain Why YOU should use Linux and How to get started with it. So without further ado, here is my guide to help boost you up in your Linux Journey</p>
+<h1>What is Linux?</h1>
+<p>I'll keep it short, Linux is <strong>NOT</strong> an Operating System, Linux itself is a <a href="https://en.wikipedia.org/wiki/Kernel_(operating_system)">Kernel</a>. GNU/Linux(Usually Pronounced as Ganoo-slash-Linux) is the combination of GNU Software and the Linux Kernel both together forming an Operating System.<br />
+So If you are ever using a Linux Distro you are actually using GNU/Linux and not just Linux</p>
+<h1>Why Linux?</h1>
+<p>There are many reasons to learn Linux. Linux is a high-performance operating system way faster than most of the other Operating Systems</p>
+<h2>1. Always Full of surprises!</h2>
+<p>Linux is interesting to learn. It will not stop surprising you when it comes to learning something “new.” Did you Know?: You usually don't have to find "EXE" files to install packages, 90% of the software you want is already available in your distro's software repository.</p>
+<h2>2. It's FOSS! (Free and Open Source Software)</h2>
+<p>The Linux Kernel and the GNU Software are Free to use and OpenSource hence you don't have to pay a penny to use them. Unlike Windows or any other paid Operating System there is no license fee</p>
+<h2>3. Are you a programmer? Well, then this is your heaven.</h2>
+<p>Programmers Love Linux as they can modify their system on a whole another level and play around with things they were usually restricted from in their old OS.<br />
+Linux supports all the Major Languages and companies prefer to use Linux as their Primary OS when it comes to developing software</p>
+<h2>4. Automate Everything!</h2>
+<p>You can automate everything in Linux using simple 10 line <a href="https://en.wikipedia.org/wiki/Shell_script">shell scripts</a>.<br />
+I have some handy shell scripts like a shell script to upload any string of text, a file, or an Image to an online file hosting service(<a href="http://0x0.st">0x0</a>).</p>
+<pre><code>#!/bin/sh
+[ -f &quot;${1}&quot; ] &amp;&amp; op=cat
+${op:-echo} &quot;${1:-`cat -`}&quot; \
+| curl -s -F file=&#39;@-&#39; &#39;http://0x0.st&#39; \
+| tee /dev/stderr \
+| xclip -sel clip</code></pre>
+<p>I even have a small script that warns me whenever my battery level is low and making all these scripts wasn't hard you just need to know a bit of shell scripting and even you can make them</p>
+<h2>5. Customize Everything!</h2>
+<p>You aren't just limited to automation. You can even customize your system to work/look/feel however you want.<br />
+You might be thinking there must be some limit but no there is none! It is YOUR system you can do whatever you want. Also, before you start thinking you will have to pay for software to get that type of customization then no you are wrong!<br />
+You can achieve every bit of customization for absolutely free. You can browse some setups on <a href="https://www.reddit.com/r/unixporn/top/?t=all">r/unixporn</a> and here are some of My setups: <a href="https://github.com/Tanish2002/dot-files/blob/master/README.md">Here</a></p>
+<h1>How to Get Started?</h1>
+<p>I hope you all are convinced by now and want to get started. Here are some of my tips and to get started:</p>
+<h2>How to choose?</h2>
+<ul>
+<li><p>The distro doesn't matter:<br />
+Yes, Unless you have very special requirements like pentesting usually distros don't even matter. You can do everything you do on one distro on some other distro<br />
+The key difference is about the ease of use, No. of packages in repos, and Stability of packages.</p></li>
+<li><p>Ease of Use:<br />
+If your priority is the ease of use then I would recommend starting with something like <a href="https://ubuntu.com/">Ubuntu</a>, <a href="https://linuxmint.com/">Linux Mint</a>, or <a href="https://pop.system76.com/">Pop_OS</a>.<br />
+All of these distros are known for their ease of use and Windows-like interface perfect for new users.</p></li>
+<li><p>No of Packages:<br />
+If you are worried that you may not find the software you usually use in your distro's software repo then go for either <a href="https://archlinux.org/">Arch</a> or <a href="https://www.debian.org/">Debian</a>, both have a large repo<br />
+Ubuntu also has a Large repo but usually, if your software is not in the repos you'll have to manually install a <a href="https://help.ubuntu.com/stable/ubuntu-help/addremove-ppa.html.en">PPA</a></p></li>
+<li><p>Stability of Packages:<br />
+Usually, there are two types of distro a stable distro and a bleeding-edge distro. A stable distro's package repository usually contains applications with their most stable version and these packages are updated only after a lot of testing so the chances of encountering a bug in these applications are very less<br />
+A bleeding-edge distro's package repository usually contains the latest version of that application and hence are usually prone to bugs but you are instead getting the latest software and getting to test out features first. So if you want a Stable distro go for <a href="https://ubuntu.com/">Ubuntu</a> or <a href="https://www.debian.org/">Debian</a> If you want a bleeding-edge distro then go for <a href="https://archlinux.org/">Arch</a> or <a href="https://www.opensuse.org/#Tumbleweed">OpenSuse Tumbleweed</a>.</p></li>
+<li><p>Complete Freedom/Control:<br />
+If you want to take over complete control of your system right from the start then go for distros like <a href="https://archlinux.org/">Arch</a>, <a href="voidlinux.org/">Void</a> or <a href="https://www.gentoo.org/">Gentoo</a>, etc where you'll have to do everything yourself nothing is given to you by default but you get the absolute freedom of doing whatever you want and setting up your system however you want.<br />
+I would not recommend these distros to Complete beginners as they do require a basic knowledge of the Linux system beforehand.</p></li>
+</ul>
+<h2>How to Install?</h2>
+<p>Most beginners friendly distros like Ubuntu, Pop_OS, Linux Mint, etc have interactive installers which are very easy to understand and use.<br />
+All you need to do is grab the ISO of your preferred Distro burn that ISO either onto a Disc or use <a href="https://rufus.ie">Rufus</a> to make a bootable flash drive. Plug-in your drive and restart your system and keep pressing the key which takes you to your bios menu(usually <code>Del</code> key).<br />
+From their on select to boot from your USB/Disc and then just follow along with the installer.</p>
+<h2>What to do after Install?</h2>
+<p>Whatever you want! Sky's the Limit.</p>
+<ul>
+<li>Fire the terminal and try out basic Linux commands<br />
+</li>
+<li>Connect to the internet and update your system.<br />
+</li>
+<li>Get a modern browser such as Chrome or Firefox.<br />
+</li>
+<li>Try out different applications that came preinstalled such as text editors, games, and image viewers.</li>
+</ul>
+<h2>Some Unique Distros</h2>
+<ul>
+<li><a href="https://nixos.org/">NixOS</a> is a distro configured in a declarative and reproducible config, It is reliable and ensures that installing packages won't break the system</li>
+<li><a href="https://www.kali.org/">Kali Linux</a> is distro geared towards various information security tasks, such as Penetration Testing, Security Research, Computer Forensics, and Reverse Engineering.</li>
+<li><a href="https://clearlinux.org/">Clear Linux</a> is a rolling release distro from Intel that initially targeted only cloud and container deployments.</li>
+<li><a href="https://puppylinux.com/">Puppy Linux</a> is a minimal distro with all basic tools preinstalled and it is so small that it can be installed on a flash drive.</li>
+</ul>
+<h1>Conclusion</h1>
+<ul>
+<li>Linux is fun to learn! It is also one of the most essential skills to have in the current market.<br />
+</li>
+<li>If you learn Linux, you are bound to get a valuable skill under your belt. Even though if you never use it professionally, it can give you the ability to use an operating system that is free to use and open source.<br />
+</li>
+<li>You can automate and customize it however you like and won't have to pay a single penny.<br />
+</li>
+<li>Distros don't matter and it is completely possible to do the same thing on every distro.<br />
+</li>
+<li>There is no best distro it all depends on your personal use case, here are my recommendations for different use cases:
+<ul>
+<li>Stable: <a href="https://ubuntu.com/">Ubuntu</a>, <a href="https://www.debian.org/">Debian</a>, or <a href="https://pop.system76.com/">Pop_OS</a>.</li>
+<li>Bleeding Edge: <a href="https://archlinux.org/">Arch</a>, <a href="https://www.debian.org/">Debian</a>, or <a href="voidlinux.org/">Void</a>.</li>
+<li>Easy to Use: <a href="https://ubuntu.com/">Ubuntu</a>, <a href="https://pop.system76.com/">Pop_OS</a>, or <a href="https://linuxmint.com/">Linux Mint</a>.</li>
+<li>Hard to Use but offer Complete Control: <a href="https://archlinux.org/">Arch</a>, <a href="https://voidlinux.org/">Void</a>, or <a href="https://www.gentoo.org/">Gentoo</a>.</li>
+</ul></li>
+</ul>
+<p>Thanks for reading till the end 😊</p>
+<small class=webdate>Apr 16, 2021</small>
+</div>
+<div class='entry'>
+<h1 id='starting-a-blog'>Starting a Blog</h1>
+<small>[<a href='posts/starting-a-blog.html'>post</a>]</small>
+<p>So I decided to make a blog, why? you may ask well I don't really know myself, I just wanted to have something I can devote some of my free time to<br />
+I also wanted to just get in the habbit of typing regularly.</p>
+<h1>What will be the blog like?</h1>
+<p>Well I have not yet decided a specific type of blog, also it's just a personal blog so I'll honestly just add blogs about what's happening in life, What I am working on or just some random cool stuff I found online<br />
+I am even thinking of writing reviews of anime I watched but I have a another <a href="http://tanish2002.rf.gd/">website</a> which is related to anime so maybe I'll do that there...again not yet decided.</p>
+<h1>How did you make this blog</h1>
+<p>Well I considered a lot of option but from the start I wanted to generate the blog using Static site generators but stuff like hexa,jekyll and hugo are too big and have a lot of dependencies which would've been overkill for this small blog<br />
+So after some research I settled on a shell script site generator which would use markdown/org as templates, then I started working on making a one but as I'm very <em>good</em> with shell scripts it ended pretty badly but after some searching I found the exact same thing I was looking for- <a href="https://github.com/LukeSmithxyz/lb">lb</a><br />
+lb was written in pure bash and was pretty easy to use but as I said earlier I wanteed to use markdown/org for templates, so I had to tinker a bit with the script and the css and then it worked perfectly<br />
+To generate sites all I have to do is <code>./lb m</code> and it asks for the article name and then opens my text editor with the draft file where I can easily write my blog in <strong>Markdown/ORG</strong> after saving the draft I can publish it using <code>./lb p</code> and it auto genrates the article with required css and header tags. For translating markdown/org to html and the other way around I use *<a href="https://pandoc.org/">Pandoc</a>*<br />
+The File structure is pretty easy to understand as well</p>
+<pre><code>blog
+├── 2021.html
+├── blogindex.html
+├── lb
+├── posts
+│   ├── .drafts
+│   │   └── starting-a-blog.md
+│   ├── .htaccess
+│   └── this-is-a-test-blog.html
+├── rss.xml
+└── sup</code></pre>
+<p>Here <code>2021.html</code> is the article file where all the aritcles from 2021 are stored in a rolling release type format, <code>blogindex.html</code> is also a auto generated file where all the blogs are stored in a list type format, in the <code>posts</code> directory <code>.drafts</code> is where all the drafts are stored which are staged to be published and all the other html files are the already published articles, all other things are self explanatory</p>
+<h1>Will this blog be updated often?</h1>
+<p>Short answer- NO, mostly becuase I'm busy with college and other stuff and this blog was mostly made becuase I wanted to make one :P, though I would try my best to update the blog often. Please don't hate me if I don't kthx.<br />
+Anyways I guess I'll end this blog here as this blog was made mostly for testing purpose. Thanks for reading 😊</p>
+<p>by <strong><a href="https://tanish2002.gitlab.io/">Tanish Khare</a></strong> <span
+class="small">[<a href="../blogindex.html">index</a>|<a href="../2021.html#starting-a-blog">rolling</a>]<br />
+<a href="../rss.xml">subscribe</a></span></p>
+<small class=webdate>Feb 22, 2021[edited]</small>
+</div>
+<div class='entry'>
+<h1 id='this-is-a-test-blog'>This is a test blog</h1>
+<small>[<a href='posts/this-is-a-test-blog.html'>post</a>]</small>
+<p>This was made using a shell script which statically generates a blog with a index and other stuff This blog was written in <strong>Markdown</strong></p>
+<h2>does the second heading work?</h2>
+<p>I will try to be regular <span class="small">pls don't hate if I am not</span></p>
+<p>by <strong><a href="https://tanish2002.gitlab.io/">Tanish Khare</a></strong> <span
+class="small">[<a href="../blogindex.html">index</a>|<a href="../2021.html#this-is-a-test-blog">rolling</a>]<br />
+<a href="../rss.xml">subscribe</a></span></p>
+<small class=webdate>Feb 22, 2021</small>
+</div>
+
+    <hr />
+    <footer>
+      <div align="center"><a href="rss.xml">subscribe</a></div>
+    </footer>
+  </body>
+</html>
