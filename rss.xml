@@ -13,7 +13,7 @@
 
 <item>
 <title>Why Linux?</title>
-<guid>https://tanish2002.gitlab.io/2021.html#why-linux</guid>
+<guid>https://tanish2002.gitlab.io/rolling.html#why-linux</guid>
 <pubDate>Fri, 16 Apr 2021 03:37:04 +0530</pubDate>
 <description><![CDATA[
 <p>I've been using Linux for 2 years now. When I started it was difficult to find a truly optimal guide or some reasons as to why should I even bother using Linux when Windows "just works".<br />
@@ -109,7 +109,7 @@ From their on select to boot from your USB/Disc and then just follow along with 
 </item>
 <item>
 <title>Starting a Blog</title>
-<guid>https://tanish2002.gitlab.io/2021.html#starting-a-blog</guid>
+<guid>https://tanish2002.gitlab.io/rolling.html#starting-a-blog</guid>
 <pubDate>Sun, 21 Feb 2021 22:42:38 +0530</pubDate>
 <description><![CDATA[
 <p>So I decided to make a blog, why? you may ask well I don't really know myself, I just wanted to have something I can devote some of my free time to<br />
@@ -124,7 +124,7 @@ lb was written in pure bash and was pretty easy to use but as I said earlier I w
 To generate sites all I have to do is <code>./lb m</code> and it asks for the article name and then opens my text editor with the draft file where I can easily write my blog in <strong>Markdown/ORG</strong> after saving the draft I can publish it using <code>./lb p</code> and it auto genrates the article with required css and header tags. For translating markdown/org to html and the other way around I use *<a href="https://pandoc.org/">Pandoc</a>*<br />
 The File structure is pretty easy to understand as well</p>
 <pre><code>blog
-├── 2021.html
+├── rolling.html
 ├── blogindex.html
 ├── lb
 ├── posts
@@ -134,25 +134,25 @@ The File structure is pretty easy to understand as well</p>
 │   └── this-is-a-test-blog.html
 ├── rss.xml
 └── sup</code></pre>
-<p>Here <code>2021.html</code> is the article file where all the aritcles from 2021 are stored in a rolling release type format, <code>blogindex.html</code> is also a auto generated file where all the blogs are stored in a list type format, in the <code>posts</code> directory <code>.drafts</code> is where all the drafts are stored which are staged to be published and all the other html files are the already published articles, all other things are self explanatory</p>
+<p>Here <code>rolling.html</code> is the blog file where all the blog posts are stored in a rolling release type format, <code>blogindex.html</code> is also a auto generated file where all the blogs are stored in a list type format, in the <code>posts</code> directory <code>.drafts</code> is where all the drafts are stored which are staged to be published and all the other html files are the already published articles, all other things are self explanatory</p>
 <h1>Will this blog be updated often?</h1>
 <p>Short answer- NO, mostly becuase I'm busy with college and other stuff and this blog was mostly made becuase I wanted to make one :P, though I would try my best to update the blog often. Please don't hate me if I don't kthx.<br />
 Anyways I guess I'll end this blog here as this blog was made mostly for testing purpose. Thanks for reading 😊</p>
 <p>by <strong><a href="https://tanish2002.gitlab.io/">Tanish Khare</a></strong> <span
-class="small">[<a href="../blogindex.html">index</a>|<a href="../2021.html#starting-a-blog">rolling</a>]<br />
+class="small">[<a href="../blogindex.html">index</a>|<a href="../rolling.html#starting-a-blog">rolling</a>]<br />
 <a href="../rss.xml">subscribe</a></span></p>
 ]]></description>
 </item>
 <item>
 <title>This is a test blog</title>
-<guid>https://tanish2002.gitlab.io/2021.html#this-is-a-test-blog</guid>
+<guid>https://tanish2002.gitlab.io/rolling.html#this-is-a-test-blog</guid>
 <pubDate>Sun, 21 Feb 2021 18:29:03 +0530</pubDate>
 <description><![CDATA[
 <p>This was made using a shell script which statically generates a blog with a index and other stuff This blog was written in <strong>Markdown</strong></p>
 <h2>does the second heading work?</h2>
 <p>I will try to be regular <span class="small">pls don't hate if I am not</span></p>
 <p>by <strong><a href="https://tanish2002.gitlab.io/">Tanish Khare</a></strong> <span
-class="small">[<a href="../blogindex.html">index</a>|<a href="../2021.html#this-is-a-test-blog">rolling</a>]<br />
+class="small">[<a href="../blogindex.html">index</a>|<a href="../rolling.html#this-is-a-test-blog">rolling</a>]<br />
 <a href="../rss.xml">subscribe</a></span></p>
 ]]></description>
 </item>
