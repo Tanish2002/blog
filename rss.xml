@@ -201,19 +201,6 @@ class="small">[<a href="../blogindex.html">index</a>|<a href="../rolling.html#st
 <a href="../rss.xml">subscribe</a></span></p>
 ]]></description>
 </item>
-<item>
-<title>This is a test blog</title>
-<guid>https://tanish2002.gitlab.io/rolling.html#this-is-a-test-blog</guid>
-<pubDate>Sun, 21 Feb 2021 18:29:03 +0530</pubDate>
-<description><![CDATA[
-<p>This was made using a shell script which statically generates a blog with a index and other stuff This blog was written in <strong>Markdown</strong></p>
-<h2>does the second heading work?</h2>
-<p>I will try to be regular <span class="small">pls don't hate if I am not</span></p>
-<p>by <strong><a href="https://tanish2002.gitlab.io/">Tanish Khare</a></strong> <span
-class="small">[<a href="../blogindex.html">index</a>|<a href="../rolling.html#this-is-a-test-blog">rolling</a>]<br />
-<a href="../rss.xml">subscribe</a></span></p>
-]]></description>
-</item>
 
 
 </channel>
