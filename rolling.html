@@ -12,6 +12,62 @@
     <p>The is the rolling release Index.</p>
     <!-- LB -->
 <div class='entry'>
+<h1 id='i-switched-to-nixos'>I switched to NixOS</h1>
+<small>[<a href='posts/i-switched-to-nixos.html'>post</a>]</small>
+<p>As a student obsessed with Linux, I had used a variety of Linux distributions over the years, from Ubuntu to Arch to some other different Linux distributions. However, I recently made the switch to NixOS, and I have to say, it was a game-changer for me. In this blog, I'll share my experience with NixOS and why I believed it was a great choice for any technology-savvy individual.</p>
+<h1>Why Did I switch?</h1>
+<p>So I was using Arch before NixOS and one might wonder what compelled me to make the switch. I switched to Arch Linux from Debian because I wanted faster updates for my some of the software I used and installing them manually was difficult. I also did not want to do big distribution upgrades from one major version to the next. Arch Linux is based on a rolling release schedule — packages are updated on a daily basis. What people often say is that Arch is “bleeding edge”. After a year or so of using Arch I usually ran into one problem which was one of the reasons that made me switch, That was how frequently the packages broke because some other package updated and it now broke some other packages. To solve this issue I had to always perform a whole system update which was fine if done every 2-3 days but if I skipped it for too long then I was in for a 1-3gb update easily. This quickly became frustrating and I wanted a way to have some bleeding edge applications that were independent and didn't break other software. After some research I found NixOS to be my best bet and it delivered perfectly!</p>
+<h1>Why NixOS?</h1>
+<p>One of the first things that stood out to me about NixOS is its approach to package management. Unlike other Linux distributions, NixOS uses the Nix package manager, which treats packages as immutable files rather than installing them directly into the system. This approach provides a number of benefits, including better reproducibility, easier rollback in case of issues, and more reliable upgrades. This was perfect for me as I could isolate packages to be bleeding edge and stable and as every package was indpendent of each other there was nothing to risk at all!</p>
+<h1>More than I asked for!</h1>
+<p>After learning about all that NixOS looked perfect for me but then I found out some other things about the distribution which changed the game drastically. The NixOS configuration file was a single file that could be used to fully specify the state of the system, making it easy to reproduce the same setup on different machines. This was a huge time-saver for me, as I could now quickly set up new development environments without having to manually install and configure software packages. This as a developer fascinated me as I could just setup my whole system in a single <code>.nix</code> file instead of modifying 100s of different types of config files with different syntax.</p>
+<p>Enter <strong>Home Manager</strong> - Home manager was like a god-sent to me as I could use it to setup all my dotfiles in the nix programming languages declaratively and it would setup everything for me. This was especially great for when I wanted to install my config on a new system as I could just install my home-manager config and boom! all my dotfiles perfectly working like I intended. Perfectly reproducible builds everytime. A example of a home manager config would be like this:</p>
+<pre><code>{ pkgs, theme, ... }: {
+  programs.foot = with theme.config; {
+    enable = true;
+    settings = {
+      main = {
+        font = &quot;${font1}&quot;;
+        ...
+      };
+      cursor.style = &quot;beam&quot;;
+      key-bindings = {
+        clipboard-copy = &quot;Mod1+c XF86Copy&quot;;
+        clipboard-paste = &quot;Mod1+v XF86Paste&quot;;
+      };
+      colors = {
+        ...
+      };
+      ...
+}</code></pre>
+<p>This block of code installs foot(A wayland terminal) and even sets it up for my personal liking.</p>
+<h1>Flakes</h1>
+<p>Nix Flakes is a new addition to the nix ecosystem, It's still a experimental feature as of now but is very powerful regardless. So, what are Nix Flakes? In short, Nix Flakes are a new way to define and manage packages in Nix. Unlike traditional Nix packages, which are defined in a single Nix expression, Nix Flakes can be composed of multiple expressions, making it easier to manage complex packages and builds. Additionally, Nix Flakes provide a number of new features, such as support for versioning, inheritance, and pinning, that make it easier to manage packages and builds over time. So how was this helpful for me you might ask? By using Nix Flakes I could setup individual dev-shells for different packages which faster than the traditional nix-shell. I could setup various different system configurations in a single flake file. Currently my whole NixOS configurations including all my packages, dotfiles, etc is one single nix flake. One of the features that I absolutely love is being able to fetch the latest git commit of a package. Previously I had to pin to a specific commit and had to manually change it If I wanted a newer version. <strong>Note: The pinning is still available</strong> Here is a example of how I use this feature.</p>
+<pre><code># flake.nix
+inputs = {
+  st-tanish2002 = {
+    url = &quot;github:Tanish2002/st-tanish2002&quot;;
+    inputs.nixpkgs.follows = &quot;nixpkgs&quot;;
+  };
+}
+
+# st.nix
+{ inputs, pkgs, ... }: {
+  #Overlay for custom build of St, Installed in home.nix
+  nixpkgs.overlays = [
+    (final: prev: {
+      st-tanish2002 = inputs.st-tanish2002.defaultPackage.x86_64-linux;
+    })
+  ];
+  home.packages = [ pkgs.st-tanish2002 ];
+}</code></pre>
+<p>This config enables me to install my latest commit of st custom build.</p>
+<h1>Conclusion</h1>
+<p>I was really impressed with NixOS and I highly recommended it to anyone who wanted a reliable, customizable, and reproducible operating system. If you were looking for a change from the traditional Linux distributions, I suggested giving NixOS a try. I was confident you wouldn't be disappointed. It has a steep learning curve but after you get most things working, it's really great. Happy hacking!</p>
+<p>You can find my config at: <a href="https://github.com/Tanish2002/nixos-config">NixOS Config</a></p>
+<small class=webdate>Aug 08, 2022[edited]</small>
+</div>
+<div class='entry'>
 <h1 id='why-linux'>Why Linux?</h1>
 <small>[<a href='posts/why-linux.html'>post</a>]</small>
 <p>I've been using Linux for 2 years now. When I started it was difficult to find a truly optimal guide or some reasons as to why should I even bother using Linux when Windows "just works".<br />
