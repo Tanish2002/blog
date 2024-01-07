@@ -12,6 +12,74 @@
     <p>The is the rolling release Index.</p>
     <!-- LB -->
 <div class='entry'>
+<h1 id='a-homelab-appeared'>A HomeLab Appeared!</h1>
+<small>[<a href='posts/a-homelab-appeared.html'>post</a>]</small>
+<p>Recently, I embarked on a journey to create my very own Homelab.
+Despite the fancy term, it's essentially just a dedicated computer
+running Linux and various services 24x7.</p>
+<p>Before we dive into the technical details, let me share the
+motivation behind creating my Homelab.</p>
+<p>My father uses Tally, an accounting software that can only run on a
+single machine at a time. When he travels, he uses a different machine,
+making it impossible to use Tally on the go. To resolve this, he would
+have had to purchase another Tally license for his travel machine. To
+provide a cost-effective and efficient solution, I convinced him to
+invest in a server. I configured the server to run a Windows VM,
+allowing my father to RDP into it and use Tally from anywhere in the
+world. This setup not only saves him the hassle of purchasing an
+additional license but also ensures the security of his data, as
+everything remains on the home server.</p>
+<p>Now Let me walk you through the specs and components of my setup.</p>
+<h1>Specs</h1>
+<p>Let's start with the specifications of my Homelab. I opted for a <a
+href="https://www.dell.com/support/manuals/en-in/poweredge-t20/t20ownersmanual/technical-specifications?guid=guid-41762680-86e6-4d39-8894-c9adaca7cc30&amp;lang=en-us">Dell
+PowerEdge T20</a>.</p>
+<h2>CPU: Intel Xeon E3-1225 v3</h2>
+<p>The solid CPU, clocked at 3.60 GHz, came bundled with the system. It
+provides ample power for all the tasks I run on the server.</p>
+<h2>GPU: Integrated Graphics</h2>
+<p>Currently using integrated graphics, I plan to upgrade to a dedicated
+graphics card in the future for improved multimedia transcoding
+capabilities.</p>
+<h2>RAM: 20GB</h2>
+<p>Equipped with 4 slots, the motherboard supports up to 32GB of RAM.
+The system came with a 4GB stick, and I added two more 8GB sticks for a
+total of 20GB. All RAM sticks are <a
+href="https://en.wikipedia.org/wiki/ECC_memory">ECC Memory</a> to ensure
+stability, especially since the motherboard supports it.</p>
+<h2>Storage: 10.5TB</h2>
+<p>My storage setup involves a total of 10.5TB, with 5.5TB of usable
+space. I utilize <a href="https://openzfs.org/">OpenZFS</a> as the file
+system, known for its robustness and battle-tested performance.</p>
+<h3>Disk Configuration</h3>
+<p>Here are the disks I'm using:</p>
+<ul>
+<li>WD Blue SA510 2.5 (500GB) (SSD) - OS drive</li>
+<li>ST4000VX000-1F4168 (4.00 TB)</li>
+<li>ST4000DM004-2U9104 (4.00 TB)</li>
+<li>ST1000DM003-1ER162 (1.00 TB)</li>
+<li>ST31000521AS (1.00 TB)</li>
+</ul>
+<p>I use the 500GB SSD for the OS, and the 4TB drives are in a mirror,
+along with the 1TB drives in another mirror. This effectively creates a
+5TB pool, acting like a <a
+href="https://en.wikipedia.org/wiki/Nested_RAID_levels#RAID_10_(RAID_1+0)">RAID-10</a>
+configuration. While I plan to add another pair of 4TB drives to expand
+the pool, it currently meets my hobbyist needs.</p>
+<h2>Misc</h2>
+<p>To accommodate extra drives beyond the 4 SATA ports, I added a PCI-E
+SATA Expansion card. The onboard Ethernet port provides internet
+connectivity, and to address power cut-offs, the system is connected to
+an external PSU.</p>
+<h1>Conclusion</h1>
+<p>In conclusion, my Homelab server, built on the Dell PowerEdge T20,
+serves my current needs with room for future expansion. Feel free to
+share your thoughts or ask any questions about my setup.</p>
+<p>In the next blog I'll discuss about the Operating System(Linux Duh..)
+I am using and why. Along with some guides on the setup.</p>
+<small class=webdate>Jan 07, 2024[edited]</small>
+</div>
+<div class='entry'>
 <h1 id='i-switched-to-nixos'>I switched to NixOS</h1>
 <small>[<a href='posts/i-switched-to-nixos.html'>post</a>]</small>
 <p>As a student obsessed with Linux, I had used a variety of Linux distributions over the years, from Ubuntu to Arch to some other different Linux distributions. However, I recently made the switch to NixOS, and I have to say, it was a game-changer for me. In this blog, I'll share my experience with NixOS and why I believed it was a great choice for any technology-savvy individual.</p>
